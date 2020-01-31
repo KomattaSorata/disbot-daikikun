@@ -1,4 +1,5 @@
 const fetch_sourcewords = require('./fetch_sourcewords');
+const fetch_sourcelines = require('./fetch_sourcelines');
 const mibunshou = require('./env_config');
 const fs = require('fs');
 const Discord = require('discord.js');
@@ -11,6 +12,10 @@ client.on('ready', () => {
 
 client.on('message', msg => {
     if(msg.author.bot === false){fetch_sourcewords(msg.content);}
+});
+
+client.on('message', msg => {
+  if(msg.author.bot === false){fetch_sourcelines(msg.content);}
 });
 
 client.setInterval( () => {
