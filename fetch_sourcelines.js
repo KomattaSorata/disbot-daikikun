@@ -12,7 +12,7 @@ function fetch_sourcelines(impmsg){
             source.forEach(item => {
                 const srclines = fs.readFileSync('srclines.txt').toString().split("\n");
                 if(item.pos === '名詞' && item.pos_detail_1 !== '接尾'){
-                    if(english.test(item.surface_form) === false && english2x.test(item.surface_form)){
+                    if(english.test(item.surface_form) === false && english2x.test(item.surface_form) === false){
                         let regline = impmsg.replace(item.surface_form, "${word}")
                         if(srclines.includes(regline) === false){
                             fs.appendFile('srclines.txt', `${regline}\n`, (err) => {
