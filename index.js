@@ -19,6 +19,6 @@ client.setInterval( () => {
     const srclines = fs.readFileSync('srclines.txt').toString().split("\n");
     const generatedMessage = srclines[Math.floor(Math.random() * srclines.length)].replace("${word}", word);
     client.channels.get(mibunshou.channelid).send(generatedMessage)
-}, 1000);
+}, 60000);
 
 client.login(mibunshou.discord_token);
