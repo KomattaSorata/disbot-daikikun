@@ -16,8 +16,14 @@ client.on('message', msg => {
 
 client.on('message', msg => {
   if(msg.author.bot === false){
-    if(msg.content.includes("\n") || msg.content.includes("。") || msg.content.includes("「") || msg.content.includes( "」")){
+    if(msg.content.includes("。") || msg.content.includes("「") || msg.content.includes( "」")){
       // Prohibit function for potential long text, avoiding complex and low accuracy processing.
+      // The risk of hitting low accuracy content is low but this is the way to go for now.
+    }else if(msg.content.includes("\n")){
+      let chopped = msg.content.split(/\r?\n/);
+      chopped.forEach(item => {
+        fetch_sourcelines(item);
+      });
     }else{
       fetch_sourcelines(msg.content);}
     }
