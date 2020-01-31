@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/KomattaSorata/twibot-daikikun#readme",
   "dependencies": {
-    "kuromoji": "^0.1.2",
-    "twitter": "^1.7.1"
+    "discord.js": "^11.5.1",
+    "kuromoji": "^0.1.2"
   }
 }
