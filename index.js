@@ -8,6 +8,11 @@ const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   console.log(`いってらっしゃい、僕のパイロットさん。`);
+  const srcwords = fs.readFileSync('srcwords.txt').toString().split("\n");
+  const srclines = fs.readFileSync('srclines.txt').toString().split("\n");
+  const op_running_msg = `【起動しました】ただいま単語${srcwords.length}件と文型${srclines.length}件が登録されています。`;
+  client.channels.get(mibunshou.channelid).send(op_running_msg);
+  client.channels.get(mibunshou.channelid_ns).send(op_running_msg);
 });
 
 client.on('message', msg => {
@@ -34,7 +39,8 @@ client.setInterval( () => {
   const word = srcwords[Math.floor(Math.random() * srcwords.length)];
   const srclines = fs.readFileSync('srclines.txt').toString().split("\n");
   const generatedMessage = srclines[Math.floor(Math.random() * srclines.length)].replace("${word}", word);
-  client.channels.get(mibunshou.channelid).send(generatedMessage)
+  client.channels.get(mibunshou.channelid).send(generatedMessage);
+  client.channels.get(mibunshou.channelid_ns).send(generatedMessage);
 }, 60000);
 
 client.login(mibunshou.discord_token);
