@@ -19,9 +19,19 @@ function fetch_sourcelines(impmsg){
                             if (err) throw err;
                             });
                         }
+                    }else{
+                        // Record rejected line for reference.
+                        fs.appendFile('rejectedsrc_eng.txt', `${msg.content}\n`, (err) => {
+                            if (err) throw err;
+                        });
                     }
                 }
             });
+        });
+    }else{
+        // Record rejected line for reference.
+        fs.appendFile('rejectedsrc_stirctsym.txt', `${msg.content}\n`, (err) => {
+            if (err) throw err;
         });
     }
 }

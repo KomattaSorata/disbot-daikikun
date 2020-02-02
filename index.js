@@ -24,6 +24,10 @@ client.on('message', msg => {
     if(msg.content.includes("。") || msg.content.includes("「") || msg.content.includes( "」")){
       // Prohibit function for potential long text, avoiding complex and low accuracy processing.
       // The risk of hitting low accuracy content is low but this is the way to go for now.
+      // Record rejected line for reference.
+      fs.appendFile('rejectedsrc.txt', `${msg.content}\n`, (err) => {
+        if (err) throw err;
+      });
     }else if(msg.content.includes("\n")){
       let chopped = msg.content.split(/\r?\n/);
       chopped.forEach(item => {
@@ -42,5 +46,18 @@ client.setInterval( () => {
   client.channels.get(mibunshou.channelid).send(generatedMessage);
   client.channels.get(mibunshou.channelid_ns).send(generatedMessage);
 }, 60000);
+
+client.on('message', msg => {
+  if(msg.author.id === userid_manage && msg.channel.type === "dm" && msg.content.startsWith('!exit')){
+    if (msg.content === '!exit'){
+      process.exit(0);
+    }else{
+      const customExitMsg = `【だいきくん退勤します】msg.content.substring(6)`;
+      client.channels.get(mibunshou.channelid).send(customExitMsg);
+      client.channels.get(mibunshou.channelid_ns).send(customExitMsg);
+      process.exit(0);
+    }
+  }
+});
 
 client.login(mibunshou.discord_token);
