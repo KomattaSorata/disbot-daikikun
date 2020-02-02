@@ -18,6 +18,7 @@
   "homepage": "https://github.com/KomattaSorata/twibot-daikikun#readme",
   "dependencies": {
     "discord.js": "^11.5.1",
-    "kuromoji": "^0.1.2"
+    "kuromoji": "^0.1.2",
+    "validator": "^12.2.0"
   }
 }
