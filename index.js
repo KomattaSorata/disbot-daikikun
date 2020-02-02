@@ -48,7 +48,7 @@ client.setInterval( () => {
 }, 60000);
 
 client.on('message', msg => {
-  if(msg.author.id === userid_manage && msg.channel.type === "dm" && msg.content.startsWith('!exit')){
+  if(msg.author.id === mibunshou.userid_manage && msg.channel.type === "dm" && msg.content.startsWith('!exit')){
     if (msg.content === '!exit'){
       process.exit(0);
     }else{
