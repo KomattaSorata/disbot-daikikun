@@ -21,7 +21,7 @@ function fetch_sourcelines(impmsg){
                         }
                     }else{
                         // Record rejected line for reference.
-                        fs.appendFile('rejectedsrc_eng.txt', `${msg.content}\n`, (err) => {
+                        fs.appendFile('rejectedsrc_eng.txt', `${impmsg}\n`, (err) => {
                             if (err) throw err;
                         });
                     }
@@ -30,7 +30,7 @@ function fetch_sourcelines(impmsg){
         });
     }else{
         // Record rejected line for reference.
-        fs.appendFile('rejectedsrc_stirctsym.txt', `${msg.content}\n`, (err) => {
+        fs.appendFile('rejectedsrc_stirctsym.txt', `${impmsg}\n`, (err) => {
             if (err) throw err;
         });
     }
