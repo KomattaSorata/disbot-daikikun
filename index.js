@@ -8,11 +8,6 @@ const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   console.log(`いってらっしゃい、僕のパイロットさん。`);
-  const srcwords = fs.readFileSync('srcwords.txt').toString().split("\n");
-  const srclines = fs.readFileSync('srclines.txt').toString().split("\n");
-  const op_running_msg = `【起動しました】ただいま単語${srcwords.length}件と文型${srclines.length}件が登録されています。`;
-  client.channels.get(mibunshou.channelid).send(op_running_msg);
-  client.channels.get(mibunshou.channelid_ns).send(op_running_msg);
 });
 
 client.on('message', msg => {
@@ -48,9 +43,14 @@ client.setInterval( () => {
 }, 60000);
 
 client.on('message', msg => {
-  if(msg.author.id === mibunshou.userid_manage && msg.channel.type === "dm" && msg.content.startsWith('!exit')){
-    if (msg.content === '!exit'){
+  if(msg.author.id === mibunshou.userid_manage && msg.channel.type === "dm"){
+    if(msg.content === '!exit'){
       process.exit(0);
+    }else if(msg.content === '!count'){
+      const srcwords = fs.readFileSync('srcwords.txt').toString().split("\n");
+      const srclines = fs.readFileSync('srclines.txt').toString().split("\n");
+      const StatusMsg_Count = `ただいま単語${srcwords.length}件と文型${srclines.length}件が登録されています。`;
+      msg.reply(StatusMsg_Count);
     };
   }
 });
