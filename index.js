@@ -51,12 +51,7 @@ client.on('message', msg => {
   if(msg.author.id === mibunshou.userid_manage && msg.channel.type === "dm" && msg.content.startsWith('!exit')){
     if (msg.content === '!exit'){
       process.exit(0);
-    }else{
-      const customExitMsg = `【だいきくん退勤します】msg.content.substring(6)`;
-      client.channels.get(mibunshou.channelid).send(customExitMsg);
-      client.channels.get(mibunshou.channelid_ns).send(customExitMsg);
-      process.exit(0);
-    }
+    };
   }
 });
 
