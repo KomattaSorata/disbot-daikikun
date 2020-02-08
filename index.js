@@ -4,6 +4,14 @@ const mibunshou = require('./env_config');
 const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const Twitter = require('twitter');
+
+const TwitterClient = new Twitter({
+  consumer_key: mibunshou.twitter_consumer_key,
+  consumer_secret: mibunshou.twitter_consumer_secret,
+  access_token_key: mibunshou.twitter_access_token_key,
+  access_token_secret: mibunshou.twitter_access_token_secret
+});
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -40,7 +48,10 @@ client.setInterval( () => {
   const generatedMessage = srclines[Math.floor(Math.random() * srclines.length)].replace("${word}", word);
   client.channels.get(mibunshou.channelid).send(generatedMessage);
   client.channels.get(mibunshou.channelid_ns).send(generatedMessage);
-}, 60000);
+  TwitterClient.post('statuses/update', {status: generatedMessage}, function(error, tweet, response) {
+    if (!error) {}
+  });
+}, 300000);
 
 client.on('message', msg => {
   if(msg.author.id === mibunshou.userid_manage && msg.channel.type === "dm"){
