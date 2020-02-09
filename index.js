@@ -46,12 +46,10 @@ client.setInterval( () => {
   const word = srcwords[Math.floor(Math.random() * srcwords.length)];
   const srclines = fs.readFileSync('srclines.txt').toString().split("\n");
   const generatedMessage = srclines[Math.floor(Math.random() * srclines.length)].replace("${word}", word);
-  client.channels.get(mibunshou.channelid).send(generatedMessage);
-  client.channels.get(mibunshou.channelid_ns).send(generatedMessage);
   TwitterClient.post('statuses/update', {status: generatedMessage}, function(error, tweet, response) {
     if (!error) {}
   });
-}, 300000);
+}, 1800000);
 
 client.on('message', msg => {
   if(msg.author.id === mibunshou.userid_manage && msg.channel.type === "dm"){
